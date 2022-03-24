@@ -14,7 +14,7 @@ GLAD的头文件包含了正确的OpenGL头文件（例如GL/gl.h）
 
 /*-----------------函数声明---------------------
 1.调整窗口的回调函数
-2.输入处理
+2.输入处理...
 ---------------------------------------------*/
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
