@@ -17,18 +17,21 @@ const unsigned int SCR_HEIGHT = 600;
 //-------------
 const char *vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
+"out vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"   gl_Position = vec4(aPos,1.0);\n"
+"   vertexColor = vec4(0.5,0.0,0.0,1.0)\n"
 "}\0";
 
 //片段着色器源码
 //-------------
 const char *fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
+"in vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"   FragColor = vertexColor;\n"
 "}\0";
 
 
@@ -42,8 +45,8 @@ void processInput(GLFWwindow *window);
 
 int main()
 {
-//初始化
-//------
+	//初始化
+	//------
 	glfwInit();
 	//设置版本号为3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -56,7 +59,7 @@ int main()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello Triangle", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Hello Windows", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -74,9 +77,9 @@ int main()
 		return -1;
 	}
 
-//设置顶点着色器
-//-------------
-	//创建着色器
+	//设置顶点着色器
+	//-------------
+		//创建着色器
 	unsigned int vertexShader;
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	//编译着色器
@@ -93,16 +96,16 @@ int main()
 		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 
-//设置片段着色器
-//-------------
+	//设置片段着色器
+	//-------------
 	unsigned int fragmentShader;
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
 
-//设置着色器程序
-//-------------
-	//创建
+	//设置着色器程序
+	//-------------
+		//创建
 	unsigned int shaderProgram;
 	shaderProgram = glCreateProgram();
 	//连接
@@ -120,10 +123,10 @@ int main()
 	//删除着色器对象
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-	
-//连接顶点属性
-//-----------
-	//顶点集合
+
+	//连接顶点属性
+	//-----------
+		//顶点集合
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
@@ -135,9 +138,9 @@ int main()
 
 
 
-//设置VBO,VAO
-//-----------
-	//生成缓冲对象
+	//设置VBO,VAO
+	//-----------
+		//生成缓冲对象
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 	//绑定缓冲对象
@@ -161,8 +164,8 @@ int main()
 
 
 
-//渲染循环
-//-------
+	//渲染循环
+	//-------
 	while (!glfwWindowShouldClose(window))
 	{
 		// 输入
