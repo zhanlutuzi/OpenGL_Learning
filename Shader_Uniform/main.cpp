@@ -1,7 +1,6 @@
 /*
 -----------------------------------------------
-只是改变了着色器源码，使得片段着色器接受顶点着色器传入
-的颜色
+使用了Uniform，并设置一个随着时间变换的颜色值
 -----------------------------------------------
 */
 
@@ -28,10 +27,10 @@ const char *vertexShaderSource = "#version 330 core\n"
 //-------------
 const char *fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
-"in vec4 vertexColor;\n"// 从顶点着色器传来的输入变量（名称相同、类型相同）
+"uniform vec4 ourColor;\n"// 在OpenGL程序代码中设定这个变量
 "void main()\n"
 "{\n"
-"   FragColor = vertexColor;\n"
+"   FragColor = ourColor;\n"
 "}\0";
 
 
@@ -59,7 +58,7 @@ int main()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello Shader", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello Uniform", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -163,28 +162,32 @@ int main()
 	glEnableVertexAttribArray(0);
 
 
-
 	//渲染循环
 	//-------
 	while (!glfwWindowShouldClose(window))
 	{
 		// 输入
-		// ----
 		processInput(window);
 
 		// 渲染
-		// ----
+		// 清除颜色缓冲
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//绘制三角形
-		//---------
+		// 记得激活着色器
 		glUseProgram(shaderProgram);
+
+		// 更新uniform颜色
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue) / 2.0f + 0.5f;
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+		// 绘制三角形
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		// 交换缓冲区输出图像
-		// ----------------
+		// 交换缓冲并查询IO事件
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

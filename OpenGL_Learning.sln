@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IndexBufferObject", "IndexB
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shader", "Shader\Shader.vcxproj", "{9DBFA14A-0525-4B8A-8FEB-3ABA375D940B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shader_Uniform", "Shader_Uniform\Shader_Uniform.vcxproj", "{CFEBC294-9D84-48F4-8599-787F14F9A919}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{9DBFA14A-0525-4B8A-8FEB-3ABA375D940B}.Release|x64.Build.0 = Release|x64
 		{9DBFA14A-0525-4B8A-8FEB-3ABA375D940B}.Release|x86.ActiveCfg = Release|Win32
 		{9DBFA14A-0525-4B8A-8FEB-3ABA375D940B}.Release|x86.Build.0 = Release|Win32
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Debug|x64.ActiveCfg = Debug|x64
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Debug|x64.Build.0 = Debug|x64
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Debug|x86.ActiveCfg = Debug|Win32
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Debug|x86.Build.0 = Debug|Win32
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Release|x64.ActiveCfg = Release|x64
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Release|x64.Build.0 = Release|x64
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Release|x86.ActiveCfg = Release|Win32
+		{CFEBC294-9D84-48F4-8599-787F14F9A919}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
